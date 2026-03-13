@@ -1,4 +1,3 @@
-// Final Version with Data Fetching and Input
 import { Suspense, useEffect } from 'react'
 import {
   Box,
@@ -18,14 +17,11 @@ import TodoInput from '../TodoInput'
 import type { Task } from '../types'
 
 const TodoListContent = ({ initialTasks }: { initialTasks: Task[] }) => {
-  const { tasks, setTasks, addTask, toggleTask, deleteTask, updateTask } =
-    useTaskStore()
+  const { tasks, setTasks, toggleTask, deleteTask, updateTask } = useTaskStore()
   const { filter, setFilter } = useFilter()
 
   useEffect(() => {
-    if (tasks.length === 0) {
-      setTasks(initialTasks)
-    }
+    if (tasks.length === 0) setTasks(initialTasks)
   }, [initialTasks, setTasks, tasks.length])
 
   const filteredTasks = tasks.filter((t) => {
@@ -36,8 +32,6 @@ const TodoListContent = ({ initialTasks }: { initialTasks: Task[] }) => {
 
   return (
     <VStack gap={4} align="stretch" w="100%">
-      <TodoInput onAdd={addTask} />
-
       <HStack justifyContent="center" gap={4} py={2}>
         <Button
           size="sm"
@@ -77,30 +71,35 @@ const TodoListContent = ({ initialTasks }: { initialTasks: Task[] }) => {
 
 const TaskListFetcher = () => {
   const fetchedTasks = useTasks()
-  return (
-    <FilterProvider>
-      <TodoListContent initialTasks={fetchedTasks} />
-    </FilterProvider>
-  )
+  return <TodoListContent initialTasks={fetchedTasks} />
 }
 
 export default function Home() {
+  const addTask = useTaskStore((state) => state.addTask)
+
   return (
     <Box maxW="600px" mx="auto" p={4}>
       <Heading mb={6} textAlign="center">
-        My Tasks
+        My Planner
       </Heading>
+
+      <Box mb={8}>
+        <TodoInput onAdd={addTask} />
+      </Box>
+
       <ErrorBoundary>
-        <Suspense
-          fallback={
-            <VStack py={10}>
-              <Spinner size="xl" color="blue.500" />
-              <Text>Loading your tasks...</Text>
-            </VStack>
-          }
-        >
-          <TaskListFetcher />
-        </Suspense>
+        <FilterProvider>
+          <Suspense
+            fallback={
+              <VStack py={10}>
+                <Spinner size="xl" color="blue.500" />
+                <Text>Loading server tasks...</Text>
+              </VStack>
+            }
+          >
+            <TaskListFetcher />
+          </Suspense>
+        </FilterProvider>
       </ErrorBoundary>
     </Box>
   )
