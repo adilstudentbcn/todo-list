@@ -10,24 +10,21 @@ import type { Task } from '../types'
 const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
   const [tasks, setTasks] = useState<Task[]>(initialTasks)
 
-  const handleAddTask = (text: string) => {
-    setTasks([...tasks, createNewTask(text)])
-  }
-
-  const handleToggle = (id: string) => {
+ 
+  const handleAddTask = (text: string) => setTasks([...tasks, createNewTask(text)])
+  
+  const handleToggle = (id: string) => 
     setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t))
-  }
-
-  const handleDelete = (id: string) => {
+  
+  const handleDelete = (id: string) => 
     setTasks(tasks.filter(t => t.id !== id))
-  }
-
-  const handleUpdate = (id: string, newText: string) => {
+  
+  const handleUpdate = (id: string, newText: string) => 
     setTasks(tasks.map(t => t.id === id ? { ...t, text: newText } : t))
-  }
 
   return (
     <VStack gap={4} align="stretch" w="100%">
+
       <TodoInput onAdd={handleAddTask} />
       
       {tasks.map((task) => (
@@ -45,7 +42,6 @@ const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
 
 const TaskListFetcher = () => {
   const fetchedTasks = useTasks() 
-
   return <TodoList initialTasks={fetchedTasks} />
 }
 
@@ -66,7 +62,6 @@ export default function Home() {
           <TaskListFetcher />
         </Suspense>
       </ErrorBoundary>
-      
     </Box>
   )
 }
