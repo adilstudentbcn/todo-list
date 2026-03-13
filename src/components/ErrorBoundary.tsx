@@ -23,10 +23,22 @@ export class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <Box p={5} bg="red.50" color="red.500" borderRadius="md" textAlign="center">
+        <Box
+          p={5}
+          bg="red.50"
+          color="red.500"
+          borderRadius="md"
+          textAlign="center"
+        >
           <Text fontWeight="bold">Something went wrong fetching data!</Text>
-          <Text fontSize="sm" mb={4}>{this.state.error?.message}</Text>
-          <Button size="sm" colorPalette="red" onClick={() => window.location.reload()}>
+          <Text fontSize="sm" mb={4}>
+            {this.state.error?.message}
+          </Text>
+          <Button
+            size="sm"
+            colorPalette="red"
+            onClick={() => window.location.reload()}
+          >
             Try Again
           </Button>
         </Box>
