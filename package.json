@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
+    "test": "vitest run",
     "format": "prettier --write .",
-    "test": "vitest"
+    "lint-eslint": "eslint .",
+    "lint-typecheck": "tsc --noEmit",
+    "lint-prettier": "prettier --check ."
   },
   "dependencies": {
     "@chakra-ui/react": "^3.34.0",

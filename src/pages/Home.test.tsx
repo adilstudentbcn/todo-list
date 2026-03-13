@@ -10,6 +10,6 @@ it('Home page smoke test', () => {
       <MemoryRouter>
         <Home />
       </MemoryRouter>
-    </ChakraProvider>
+    </ChakraProvider>,
   )
 })

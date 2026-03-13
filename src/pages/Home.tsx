@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { VStack, Heading, Box, Text, Separator } from '@chakra-ui/react'
-import type { Task } from '../types' 
+import type { Task } from '../types'
 import { createNewTask } from '../logic'
 import TodoInput from '../TodoInput'
 import TodoItem from '../TodoItem'
@@ -21,7 +21,9 @@ export default function Home() {
   }
 
   const toggleTask = (id: string) => {
-    setTasks(tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)))
+    setTasks(
+      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
+    )
   }
 
   const deleteTask = (id: string) => {
@@ -32,12 +34,14 @@ export default function Home() {
     setTasks(tasks.map((t) => (t.id === id ? { ...t, text: newText } : t)))
   }
 
-  const remainingTasks = tasks.filter(t => !t.completed).length
+  const remainingTasks = tasks.filter((t) => !t.completed).length
 
   return (
     <VStack gap={8} align="stretch">
-      <Heading textAlign="center" color="brand.500">My Planner</Heading>
-      
+      <Heading textAlign="center" color="brand.500">
+        My Planner
+      </Heading>
+
       <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white">
         <TodoInput onAdd={handleAddTask} />
       </Box>
@@ -49,7 +53,7 @@ export default function Home() {
             task={task}
             onToggle={toggleTask}
             onDelete={deleteTask}
-            onUpdate={updateTask} 
+            onUpdate={updateTask}
           />
         ))}
       </Box>
@@ -58,7 +62,8 @@ export default function Home() {
         <Box textAlign="center" pt={4}>
           <Separator mb={4} />
           <Text fontSize="sm" color="gray.500" fontWeight="medium">
-            {remainingTasks} {remainingTasks === 1 ? 'task' : 'tasks'} remaining out of {tasks.length}
+            {remainingTasks} {remainingTasks === 1 ? 'task' : 'tasks'} remaining
+            out of {tasks.length}
           </Text>
         </Box>
       )}

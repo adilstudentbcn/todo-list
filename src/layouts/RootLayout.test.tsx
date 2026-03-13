@@ -10,6 +10,6 @@ it('RootLayout smoke test', () => {
       <MemoryRouter>
         <RootLayout />
       </MemoryRouter>
-    </ChakraProvider>
+    </ChakraProvider>,
   )
 })

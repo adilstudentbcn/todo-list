@@ -8,7 +8,6 @@ export default function RootLayout() {
       <Box borderBottomWidth="1px" py={4} bg="white" shadow="sm">
         <Container maxW="md">
           <HStack gap={8}>
-            
             {/* Standard React Router Link wrapping a Chakra 'span' */}
             <Link to="/">
               <ChakraLink as="span" fontWeight="bold" color="blue.500">
@@ -21,14 +20,13 @@ export default function RootLayout() {
                 About
               </ChakraLink>
             </Link>
-
           </HStack>
         </Container>
       </Box>
-      
+
       {/* Main Content Area */}
       <Container maxW="md" py={8}>
-        <Outlet /> 
+        <Outlet />
       </Container>
     </Box>
   )

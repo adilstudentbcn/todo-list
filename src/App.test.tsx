@@ -7,6 +7,6 @@ it('App smoke test', () => {
   render(
     <ChakraProvider value={theme}>
       <App />
-    </ChakraProvider>
+    </ChakraProvider>,
   )
 })

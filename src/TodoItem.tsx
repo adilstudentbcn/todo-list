@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Box, Text, Button, HStack, Input, IconButton } from '@chakra-ui/react'
+import { Box, Text, Button, HStack, Input } from '@chakra-ui/react'
 import type { Task } from './types'
 
 interface Props {
   task: Task
   onToggle: (id: string) => void
   onDelete: (id: string) => void
-  onUpdate: (id: string, newText: string) => void 
+  onUpdate: (id: string, newText: string) => void
 }
 
 function TodoItem({ task, onToggle, onDelete, onUpdate }: Props) {
@@ -21,7 +21,7 @@ function TodoItem({ task, onToggle, onDelete, onUpdate }: Props) {
   }
 
   const handleCancel = () => {
-    setEditText(task.text) 
+    setEditText(task.text)
     setIsEditing(false)
   }
 
@@ -77,7 +77,11 @@ function TodoItem({ task, onToggle, onDelete, onUpdate }: Props) {
           ) : (
             <>
               {!task.completed && (
-                <Button size="xs" variant="ghost" onClick={() => setIsEditing(true)}>
+                <Button
+                  size="xs"
+                  variant="ghost"
+                  onClick={() => setIsEditing(true)}
+                >
                   Edit
                 </Button>
               )}

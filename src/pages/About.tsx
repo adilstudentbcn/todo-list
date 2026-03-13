@@ -9,7 +9,7 @@ export default function About() {
         <Text textAlign="center">
           This app helps you organize your daily tasks.
         </Text>
-        
+
         <Link to="/">
           <Button colorPalette="blue" variant="solid">
             Back to Tasks
