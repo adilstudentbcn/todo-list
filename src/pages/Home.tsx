@@ -1,3 +1,4 @@
+// Final Version with Data Fetching and Input
 import { Suspense, useEffect } from 'react'
 import {
   Box,
@@ -14,11 +15,11 @@ import { useTaskStore } from '../store/useTaskStore'
 import { FilterProvider, useFilter } from '../context/FilterContext'
 import TodoItem from '../TodoItem'
 import TodoInput from '../TodoInput'
+import type { Task } from '../types'
 
-const TodoListContent = ({ initialTasks }: { initialTasks: any[] }) => {
+const TodoListContent = ({ initialTasks }: { initialTasks: Task[] }) => {
   const { tasks, setTasks, addTask, toggleTask, deleteTask, updateTask } =
     useTaskStore()
-
   const { filter, setFilter } = useFilter()
 
   useEffect(() => {
