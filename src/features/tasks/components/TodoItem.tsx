@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Text, Button, HStack, Input } from '@chakra-ui/react'
-import type { Task } from './types'
+import type { Task } from '../../../shared/types/types'
 
 interface Props {
   task: Task

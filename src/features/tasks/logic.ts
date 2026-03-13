@@ -1,4 +1,4 @@
-import type { Task } from './types'
+import type { Task } from '../../shared/types/types'
 
 export const createNewTask = (text: string): Task => {
   const cleanText = text.trim()
