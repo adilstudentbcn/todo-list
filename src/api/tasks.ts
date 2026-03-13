@@ -1,5 +1,12 @@
 import type { Task } from '../types'
 
+interface JsonPlaceholderTodo {
+  id: number
+  title: string
+  completed: boolean
+  userId: number
+}
+
 export const fetchInitialTasks = async (): Promise<Task[]> => {
   const response = await fetch(
     'https://jsonplaceholder.typicode.com/todos?_limit=3',
@@ -9,9 +16,9 @@ export const fetchInitialTasks = async (): Promise<Task[]> => {
     throw new Error('Failed to fetch tasks from server')
   }
 
-  const data = await response.json()
+  const data: JsonPlaceholderTodo[] = await response.json()
 
-  return data.map((item: any) => ({
+  return data.map((item) => ({
     id: crypto.randomUUID(),
     text: item.title,
     completed: item.completed,
