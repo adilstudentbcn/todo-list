@@ -1,3 +1,6 @@
+
+// Final Version with Data Fetching and Input
+
 import { Suspense, useState } from 'react'
 import { Box, Heading, VStack, Spinner, Text } from '@chakra-ui/react'
 import { ErrorBoundary } from '../components/ErrorBoundary'
