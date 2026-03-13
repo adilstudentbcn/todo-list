@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from './theme'
+import theme from './shared/theme/theme'
 import App from './App'
 
 it('App smoke test', () => {

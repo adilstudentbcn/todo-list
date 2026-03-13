@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi, describe, it, expect } from 'vitest'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from './theme'
+import theme from '../../../shared/theme/theme'
 import TodoInput from './TodoInput'
 
 describe('TodoInput Component', () => {

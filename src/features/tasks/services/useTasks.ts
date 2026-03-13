@@ -1,6 +1,6 @@
 import { use } from 'react'
 import { fetchInitialTasks } from '../api/tasks'
-import type { Task } from '../types'
+import type { Task } from '../../../shared/types/types'
 
 const taskPromise = fetchInitialTasks()
 

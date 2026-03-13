@@ -1,12 +1,9 @@
-This is a simple To-Do List WebApp
-My first React project
+To-Do List WebApp
 
-A task management application built with React and TypeScript.
+A modern, production-ready task management application built with React, TypeScript, and Chakra UI.
 
-Potential Features
-
-- Create, Read, Update, and Delete tasks.
-- Save tasks to a local Storage so they stay after refresh.
-- View tasks by status (All, Active, Completed).
-- Tag tasks with labels (Work, Personal, Urgent).
-- Support for system-wide light/dark themes.
+Features
+Task Management: Create, read, update, and delete tasks instantly.
+Server Syncing: Fetches initial baseline tasks from an external API using Suspense boundaries.
+Smart Filtering: Quickly view tasks by status (All, Active, Completed).
+Robust Error Handling: Global ErrorBoundary catches and isolates UI crashes.

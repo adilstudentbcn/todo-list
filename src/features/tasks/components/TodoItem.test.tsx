@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from './theme'
+import theme from '../../../shared/theme/theme'
 import TodoItem from './TodoItem'
-import type { Task } from './types'
+import type { Task } from '../../../shared/types/types'
 
 describe('TodoItem Comprehensive Test', () => {
   const mockTask: Task = {

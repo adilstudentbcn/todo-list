@@ -8,13 +8,16 @@ import {
   Button,
   HStack,
 } from '@chakra-ui/react'
-import { ErrorBoundary } from '../components/ErrorBoundary'
-import { useTasks } from '../services/useTasks'
-import { useTaskStore } from '../store/useTaskStore'
-import { FilterProvider, useFilter } from '../context/FilterContext'
-import TodoItem from '../TodoItem'
-import TodoInput from '../TodoInput'
-import type { Task } from '../types'
+import { ErrorBoundary } from '../../shared/components/ErrorBoundary/ErrorBoundary'
+import { useTasks } from '../../features/tasks/services/useTasks'
+import { useTaskStore } from '../../features/tasks/store/useTaskStore'
+import {
+  FilterProvider,
+  useFilter,
+} from '../../features/tasks/context/FilterContext'
+import TodoItem from '../../features/tasks/components/TodoItem'
+import TodoInput from '../../features/tasks/components/TodoInput'
+import type { Task } from '../../shared/types/types'
 
 const TodoListContent = ({ initialTasks }: { initialTasks: Task[] }) => {
   const { tasks, setTasks, toggleTask, deleteTask, updateTask } = useTaskStore()

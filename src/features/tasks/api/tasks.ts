@@ -1,4 +1,4 @@
-import type { Task } from '../types'
+import type { Task } from '../../../shared/types/types'
 
 interface JsonPlaceholderTodo {
   id: number

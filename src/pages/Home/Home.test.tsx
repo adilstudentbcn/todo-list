@@ -1,14 +1,14 @@
 import { render } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from '../theme'
-import About from './About'
+import theme from '../../shared/theme/theme'
+import Home from './Home'
 
-it('About page smoke test', () => {
+it('Home page smoke test', () => {
   render(
     <ChakraProvider value={theme}>
       <MemoryRouter>
-        <About />
+        <Home />
       </MemoryRouter>
     </ChakraProvider>,
   )
