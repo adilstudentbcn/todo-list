@@ -1,6 +1,4 @@
-// Final Version with Data Fetching and Input
-
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { Box, Heading, VStack, Spinner, Text } from '@chakra-ui/react'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import { useTasks } from '../services/useTasks'
@@ -13,21 +11,23 @@ const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
   const [tasks, setTasks] = useState<Task[]>(initialTasks)
 
   const handleAddTask = (text: string) =>
-    setTasks([...tasks, createNewTask(text)])
+    setTasks((prev) => [createNewTask(text), ...prev])
 
   const handleToggle = (id: string) =>
-    setTasks(
-      tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
     )
 
   const handleDelete = (id: string) =>
-    setTasks(tasks.filter((t) => t.id !== id))
+    setTasks((prev) => prev.filter((t) => t.id !== id))
 
   const handleUpdate = (id: string, newText: string) =>
-    setTasks(tasks.map((t) => (t.id === id ? { ...t, text: newText } : t)))
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, text: newText } : t)),
+    )
 
   return (
-    <VStack gap={4} align="stretch" w="100%">
+    <VStack gap={4} align="stretch" w="100%" mt={6}>
       <TodoInput onAdd={handleAddTask} />
 
       {tasks.map((task) => (
