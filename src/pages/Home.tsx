@@ -1,4 +1,3 @@
-
 // Final Version with Data Fetching and Input
 
 import { Suspense, useState } from 'react'
