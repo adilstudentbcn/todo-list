@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense, useState } from 'react'
 import { Box, Heading, VStack, Spinner, Text } from '@chakra-ui/react'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import { useTasks } from '../services/useTasks'
@@ -27,7 +27,7 @@ const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
     )
 
   return (
-    <VStack gap={4} align="stretch" w="100%" mt={6}>
+    <VStack gap={4} align="stretch" w="100%">
       <TodoInput onAdd={handleAddTask} />
 
       {tasks.map((task) => (
