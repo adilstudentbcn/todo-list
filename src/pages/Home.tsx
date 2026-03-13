@@ -1,42 +1,73 @@
-import { Suspense, useState } from 'react'
-import { Box, Heading, VStack, Spinner, Text } from '@chakra-ui/react'
+import { Suspense, useEffect } from 'react'
+import {
+  Box,
+  Heading,
+  VStack,
+  Spinner,
+  Text,
+  Button,
+  HStack,
+} from '@chakra-ui/react'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import { useTasks } from '../services/useTasks'
+import { useTaskStore } from '../store/useTaskStore'
+import { FilterProvider, useFilter } from '../context/FilterContext'
 import TodoItem from '../TodoItem'
 import TodoInput from '../TodoInput'
-import { createNewTask } from '../logic'
-import type { Task } from '../types'
 
-const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks)
+const TodoListContent = ({ initialTasks }: { initialTasks: any[] }) => {
+  const { tasks, setTasks, addTask, toggleTask, deleteTask, updateTask } =
+    useTaskStore()
 
-  const handleAddTask = (text: string) =>
-    setTasks((prev) => [createNewTask(text), ...prev])
+  const { filter, setFilter } = useFilter()
 
-  const handleToggle = (id: string) =>
-    setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
-    )
+  useEffect(() => {
+    if (tasks.length === 0) {
+      setTasks(initialTasks)
+    }
+  }, [initialTasks, setTasks, tasks.length])
 
-  const handleDelete = (id: string) =>
-    setTasks((prev) => prev.filter((t) => t.id !== id))
-
-  const handleUpdate = (id: string, newText: string) =>
-    setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, text: newText } : t)),
-    )
+  const filteredTasks = tasks.filter((t) => {
+    if (filter === 'active') return !t.completed
+    if (filter === 'completed') return t.completed
+    return true
+  })
 
   return (
     <VStack gap={4} align="stretch" w="100%">
-      <TodoInput onAdd={handleAddTask} />
+      <TodoInput onAdd={addTask} />
 
-      {tasks.map((task) => (
+      <HStack justifyContent="center" gap={4} py={2}>
+        <Button
+          size="sm"
+          onClick={() => setFilter('all')}
+          variant={filter === 'all' ? 'solid' : 'outline'}
+        >
+          All
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => setFilter('active')}
+          variant={filter === 'active' ? 'solid' : 'outline'}
+        >
+          Active
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => setFilter('completed')}
+          variant={filter === 'completed' ? 'solid' : 'outline'}
+        >
+          Done
+        </Button>
+      </HStack>
+
+      {filteredTasks.map((task) => (
         <TodoItem
           key={task.id}
           task={task}
-          onToggle={handleToggle}
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
+          onToggle={toggleTask}
+          onDelete={deleteTask}
+          onUpdate={updateTask}
         />
       ))}
     </VStack>
@@ -45,7 +76,11 @@ const TodoList = ({ initialTasks }: { initialTasks: Task[] }) => {
 
 const TaskListFetcher = () => {
   const fetchedTasks = useTasks()
-  return <TodoList initialTasks={fetchedTasks} />
+  return (
+    <FilterProvider>
+      <TodoListContent initialTasks={fetchedTasks} />
+    </FilterProvider>
+  )
 }
 
 export default function Home() {
@@ -54,7 +89,6 @@ export default function Home() {
       <Heading mb={6} textAlign="center">
         My Tasks
       </Heading>
-
       <ErrorBoundary>
         <Suspense
           fallback={
